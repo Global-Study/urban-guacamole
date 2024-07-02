@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Whole Page Load</title>
+    <!-- Add any additional metadata or links to stylesheets here -->
+    <meta
+      name="description"
+      content="This is a simple webpage that includes a hard to get through page loader"
+    />
+    <style>
+      .loader-container {
+        position: fixed;
+        inset: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loader {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20vw;
+        height: 20vw;
+
+        animation: 0.5s ease-out infinite alternate both;
+        animation-name: wobble;
+      }
+
+      .loader-circle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20vw;
+        height: 20vw;
+      }
+
+      .loader-circle::after {
+        position: absolute;
+
+        content: "";
+        display: block;
+        width: 5vw;
+        height: 5vw;
+        border-radius: 100%;
+        border: 2vw solid blueviolet;
+        animation: 0.5s ease-out infinite alternate both;
+        animation-name: loader;
+        opacity: 0.2;
+      }
+
+      .loader-circle:nth-child(1)::after {
+        animation-delay: 0.15s;
+        border-color: blue;
+      }
+
+      .loader-circle:nth-child(2)::after {
+        animation-delay: 0.3s;
+        border-color: cyan;
+      }
+
+      @keyframes wobble {
+        0% {
+          scale: 1;
+        }
+
+        100% {
+          scale: 1.2;
+        }
+      }
+
+      @keyframes loader {
+        0% {
+          border-width: 1vw;
+        }
+
+        30% {
+          border-width: 1vw;
+        }
+
+        100% {
+          border-width: 3vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader-container">
+      <div class="loader">
+        <div class="loader-circle"></div>
+        <div class="loader-circle"></div>
+        <div class="loader-circle"></div>
+      </div>
+    </div>
+    <!-- Script Section -->
+    <script>
+      // @ts-check
+
+      const waitForMs = (/** @type {number} */ ms) =>
+        new Promise((resolve) => setTimeout(resolve, ms));
+
+      window.onload = async function () {
+        // Waiting for "page data" to arrive
+        await waitForMs(2000);
+
+        const paragraph = document.createElement("p");
+        paragraph.innerText =
+          "This is the main content of the page. Thank you for waiting!";
+        document.body.appendChild(paragraph);
+
+        const table = document.createElement("table");
+        table.setAttribute("border", "1");
+        table.innerHTML = `
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+            </tr>
+            <tr>
+                <td>Row 1, Cell 1</td>
+                <td>Row 1, Cell 2</td>
+                <td>Row 1, Cell 3</td>
+            </tr>
+            <tr>
+                <td>Row 2, Cell 1</td>
+                <td>Row 2, Cell 2</td>
+                <td>Row 2, Cell 3</td>
+            </tr>
+          `;
+        document.body.appendChild(table);
+
+        document.querySelector(".loader")?.remove();
+      };
+    </script>
+  </body>
+</html>
