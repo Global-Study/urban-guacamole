@@ -1,61 +1,110 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Simple HTML Website</title>
     <!-- Add any additional metadata or links to stylesheets here -->
-    <meta name="description" content="This is a simple HTML website featuring a navigation bar, a dynamic table, a color-changing button, and basic JavaScript functionality.">
-</head>
-<body>
+    <meta
+      name="description"
+      content="This is a simple HTML website featuring a navigation bar, a dynamic table, a color-changing button, and basic JavaScript functionality."
+    />
+    <style>
+      .table .row {
+        display: flex;
+      }
+
+      .table .row div {
+        border: 1px solid black;
+        width: 10rem;
+      }
+    </style>
+  </head>
+  <body>
     <!-- Navigation Bar -->
     <nav>
-        <ul>
-            <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li>
-        </ul>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
 
     <!-- Main Content Area -->
     <main>
-        <h1>Welcome to My Simple Website</h1>
-        <p>This is the main content of the webpage.</p>
+      <h1>Welcome to My Simple Website</h1>
+      <p>This is the main content of the webpage.</p>
 
-        <!-- Table Example -->
-        <table id="myTable" border="1">
-            <tr>
-                <th>Header 1</th>
-                <th>Header 2</th>
-                <th>Header 3</th>
-            </tr>
-            <tr>
-                <td>Row 1, Cell 1</td>
-                <td>Row 1, Cell 2</td>
-                <td>Row 1, Cell 3</td>
-            </tr>
-            <tr>
-                <td>Row 2, Cell 1</td>
-                <td>Row 2, Cell 2</td>
-                <td>Row 2, Cell 3</td>
-            </tr>
-        </table>
+      <p>Below is a proper table definition</p>
+      <table border="1">
+        <tr>
+          <th>Header 1</th>
+          <th>Header 2</th>
+          <th>Header 3</th>
+        </tr>
+        <tr>
+          <td>Row 1, Cell 1</td>
+          <td>Row 1, Cell 2</td>
+          <td>Row 1, Cell 3</td>
+        </tr>
+        <tr>
+          <td>Row 2, Cell 1</td>
+          <td>Row 2, Cell 2</td>
+          <td>Row 2, Cell 3</td>
+        </tr>
+      </table>
 
-        <!-- Button to Change Table Color -->
-        <button onclick="changeTableColor()">Change Table Color</button>
+      <p>With header defined as regular tr->td</p>
+      <table border="1">
+        <tr>
+          <td>Header 1</td>
+          <td>Header 2</td>
+          <td>Header 3</td>
+        </tr>
+        <tr>
+          <td>Row 1, Cell 1</td>
+          <td>Row 1, Cell 2</td>
+          <td>Row 1, Cell 3</td>
+        </tr>
+        <tr>
+          <td>Row 2, Cell 1</td>
+          <td>Row 2, Cell 2</td>
+          <td>Row 2, Cell 3</td>
+        </tr>
+      </table>
+
+      <p>Everything is divs...</p>
+
+      <div class="table">
+        <div class="row">
+          <div>Header 1</div>
+          <div>Header 2</div>
+          <div>Header 3</div>
+        </div>
+        <div class="row">
+          <div>Row 1, Cell 1</div>
+          <div>Row 1, Cell 2</div>
+          <div>Row 1, Cell 3</div>
+        </div>
+        <div class="row">
+          <div>Row 2, Cell 1</div>
+          <div>Row 2, Cell 2</div>
+          <div>Row 2, Cell 3</div>
+        </div>
+      </div>
+
+      <!-- No-op button -->
+      <button style="margin-top: 20rem" type="button">Do nothing</button>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 My Simple Website</p>
+      <p>&copy; 2024 My Simple Website</p>
     </footer>
 
     <!-- Script Section -->
     <script>
-        window.onload = function() {
-            alert("Welcome to my simple website!");
-        };
-
-        function changeTableColor() {
-            var table = document.getElementById("myTable");
-            table.style.backgroundColor = "lightblue";
-        }
+      window.onload = function () {
+        alert("Welcome to my simple website!");
+      };
     </script>
-</body>
+  </body>
 </html>
