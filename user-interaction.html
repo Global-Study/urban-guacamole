@@ -13,11 +13,13 @@
         inset: 0;
 
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
       }
 
       .loader {
+        pointer-events: none;
         position: relative;
         display: flex;
         justify-content: center;
@@ -96,6 +98,9 @@
         <div class="loader-circle"></div>
         <div class="loader-circle"></div>
       </div>
+      <button type="button" onclick="reveal()">
+        Click to reveal the contents of the page.
+      </button>
     </div>
     <!-- Script Section -->
     <script>
@@ -104,13 +109,10 @@
       const waitForMs = (/** @type {number} */ ms) =>
         new Promise((resolve) => setTimeout(resolve, ms));
 
-      window.onload = async function () {
-        // Waiting for "page data" to arrive
-        await waitForMs(2000);
-
+      function reveal() {
         const paragraph = document.createElement("p");
         paragraph.innerText =
-          "This is the main content of the page. Thank you for waiting!";
+          "This is the main content of the page. Thank you for interacting!";
         document.body.appendChild(paragraph);
 
         const table = document.createElement("table");
@@ -135,7 +137,7 @@
         document.body.appendChild(table);
 
         document.querySelector(".loader-container")?.remove();
-      };
+      }
     </script>
   </body>
 </html>

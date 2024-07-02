@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lazy Loading Scroll</title>
+    <meta
+      name="description"
+      content="This is a simple webpage that includes a hard to get through page loader"
+    />
+    <style>
+      table {
+        border-collapse: collapse;
+        margin-bottom: 20rem;
+      }
+
+      td {
+        padding: 10vh 5rem;
+      }
+
+      #scroll-detector {
+        height: 10rem;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader-container">
+      <p>
+        This is the main content of the page. Scroll to see more content of the
+        table.
+      </p>
+      <table border="1">
+        <tr>
+          <th>Index</th>
+          <th>Price</th>
+          <th>Area (m<sup>2</sup>)</th>
+        </tr>
+      </table>
+      <div id="scroll-detector"></div>
+    </div>
+    <!-- Script Section -->
+    <script>
+      // @ts-check
+
+      const waitForMs = (/** @type {number} */ ms) =>
+        new Promise((resolve) => setTimeout(resolve, ms));
+
+      let nextRowIdx = 0;
+
+      function pseudoRandom01(/** @type {number} */ seed) {
+        return (Math.sin(Math.cos(nextRowIdx * 12.71212)) + 1) / 2;
+      }
+
+      function appendRow() {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${nextRowIdx}</td>
+            <td>${
+              Math.floor(pseudoRandom01(nextRowIdx * 2) * 200000 + 40000) / 100
+            }</td>
+            <td>${
+              Math.floor(pseudoRandom01(nextRowIdx * 2) * 5000 + 2000) / 100
+            }</td>
+          `;
+        nextRowIdx++;
+        document.querySelector("table")?.appendChild(row);
+      }
+
+      window.onload = async function () {
+        for (let i = 0; i < 5; ++i) {
+          appendRow();
+        }
+
+        console.log("Creating the intersection observer");
+        const obs = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting && nextRowIdx < 50) {
+            appendRow();
+          }
+        });
+
+        const scrollDetectorEl = document.querySelector("#scroll-detector");
+        if (scrollDetectorEl) {
+          obs.observe(scrollDetectorEl);
+        }
+      };
+    </script>
+  </body>
+</html>
